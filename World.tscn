@@ -1,5 +1,76 @@
-[gd_scene format=1]
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://Ground.gd" type="Script" id=1]
+[ext_resource path="res://Selectable.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sprites/character.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 13.9307
+height = 26.0059
 
 [node name="World" type="Node"]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Ground" type="Area2D" parent="Node2D"]
+
+transform/pos = Vector2( 512.618, 299.982 )
+transform/scale = Vector2( 15.988, 9.34318 )
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 3.19926, 0, 0, 3.20554, 0.00737, 0.265648 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Ground"]
+
+transform/pos = Vector2( 0.00737, 0.265648 )
+transform/scale = Vector2( 3.19926, 3.20554 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+transform/pos = Vector2( 557.841, 288.941 )
+input/pickable = true
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+
+[node name="Area2D" type="Area2D" parent="KinematicBody2D"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -0.79137, -0.00602531 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="KinematicBody2D/Area2D"]
+
+transform/scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/Area2D"]
+
+transform/pos = Vector2( -0.79137, -0.00602531 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
 
 
